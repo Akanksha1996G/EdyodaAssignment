@@ -1,0 +1,43 @@
+Assignment 4 voting app
+1)--> kubectl apply -f .
+    this will create pods for all the .yaml files present in current directory. 
+    
+2)--> kubectl get svc
+   And also for voting pod 31000 NodePort is assigned 
+   And for result pod 31001 NodePort is assigned .
+   
+3) After accessing voting app with NodePort http://52.221.204.160:31000/ in browser we are able to vote.
+   And accessing result pod  with NodePort http://52.221.204.160:31001/ in browser we are able to see result.
+   
+4) When tried deleting voting pod it created new voting pod instantly.
+    -->kubectl delete pod vote-94849dc97-r6xbv
+
+    after deleting worker it created new pod but app was not taking votes.
+     -->kubectl delete pod worker-dd46d7584-48gcl   
+     
+     [root@ip-172-31-16-102 k8s-specifications]# kubectl get po
+      NAME                      READY   STATUS            RESTARTS   AGE
+      db-b54cd94f4-84z6b        2/2     Running           0          10m
+      redis-868d64d78-bzq5r     2/2     Running           0          10m
+      result-5d57b59f4b-szmj2   2/2     Running           0          10m
+      vote-94849dc97-zf7tr      2/2     Running           0          2m17s
+      worker-dd46d7584-48gcl    2/2     Terminating       0          10m
+      worker-dd46d7584-zm47g    0/2     PodInitializing   0          6s
+
+     
+     
+    and db pod same obeservation as after deleting it created new pods instantly.
+    But deleting db pod old data of voting result is lost.
+    -->kubectl delete pod db-b54cd94f4-84z6b
+    
+    [root@ip-172-31-16-102 k8s-specifications]# kubectl get po
+    NAME                      READY   STATUS        RESTARTS   AGE
+    db-b54cd94f4-84z6b        2/2     Terminating   0          11m
+    db-b54cd94f4-d2szs        1/2     Running       0          4s
+    redis-868d64d78-bzq5r     2/2     Running       0          11m
+    result-5d57b59f4b-szmj2   2/2     Running       0          11m
+    vote-94849dc97-zf7tr      2/2     Running       0          2m48s
+    worker-dd46d7584-zm47g    2/2     Running       0          37s
+
+    
+Assignment 3
