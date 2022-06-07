@@ -39,4 +39,23 @@ Assignment 4 voting app
     vote-94849dc97-zf7tr      2/2     Running       0          2m48s
     worker-dd46d7584-zm47g    2/2     Running       0          37s
 
+Assignment 2 Replica set
+        In case of single copy of pod we should use daemonSet instead of RS, so that the pods can be garbage collected when we delete the daemonSet 
+        and no new pod is created. If we want to have a single instance of pod on all nodes hen we go for daemonSet.
+        
+Assignment 3 Service
+    1)--> sudo netstat -tulpn | grep LISTEN
+        This will check the port status
     
+    2)--> kubectl get svc
+        If the port is already listening, then check the services whether it is on ClusterIP or NodePort.
+        
+    3)  --> kubectl apply -f replicaSet.yaml
+        If it is ClusterIP, then we will change it to NodePort using 
+        --> kubectl edit service #servicename
+        
+        Even after changing the type of Service if it is not working then we delete all the old pods and services and apply the replicaSet.yaml
+        so that it will create the services again.
+        
+     4) After , we will try to run the application. If it fails to run again then the last option is to change the port in replicaSet.yaml
+        
