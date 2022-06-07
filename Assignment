@@ -39,7 +39,7 @@ Assignment 4 voting app
     vote-94849dc97-zf7tr      2/2     Running       0          2m48s
     worker-dd46d7584-zm47g    2/2     Running       0          37s
 
-Assignment 2 Replica set
+Assignment 1 Replica set
         In case of single copy of pod we should use daemonSet instead of RS, so that the pods can be garbage collected when we delete the daemonSet 
         and no new pod is created. If we want to have a single instance of pod on all nodes hen we go for daemonSet.
         
